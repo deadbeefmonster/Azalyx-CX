@@ -56,6 +56,11 @@ add_executable(${PROJECT_NAME}
     src/main.cpp
 )
 
+string(TOLOWER ${CMAKE_BUILD_TYPE} build_type)
+if (build_type STREQUAL release)
+    target_compile_definitions(${PROJECT_NAME} PUBLIC QT_NO_DEBUG_OUTPUT)
+endif()
+
 target_include_directories(${PROJECT_NAME} PUBLIC src/include)
 target_link_libraries(${PROJECT_NAME} Qt6::Core)
 target_link_libraries(${PROJECT_NAME} Qt6::Sql)
