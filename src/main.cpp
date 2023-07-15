@@ -83,8 +83,8 @@ int main(int argc, char *argv[])
 
     // System info
     qInfo().nospace().noquote() << "System Info: " << QSysInfo::prettyProductName()
-                                << " (" << QSysInfo::kernelType() << " " << QSysInfo::kernelVersion()
-                                << ") " << QSysInfo::buildAbi();
+                                << " - " << QSysInfo::kernelType() << " " << QSysInfo::kernelVersion()
+                                << " - " << QSysInfo::buildAbi();
     // Configuration
     qInfo().nospace().noquote() << "Configuration file: " << settings.fileName() << "\n\n";
 
@@ -96,10 +96,8 @@ int main(int argc, char *argv[])
     parser.addVersionOption();
 
     // Initialize/first time stuff
-    QCommandLineOption initializeOption("initialize", QCoreApplication::translate("main", "Initialize the settings data and database (equivalent of --initialize-settings and --initialize-database)."));
-    QCommandLineOption initializeSettingsOption("initialize-settings", QCoreApplication::translate("main", "Initialize the settings data."));
+    QCommandLineOption initializeOption("initialize", QCoreApplication::translate("main", "Initialize the settings data."));
     parser.addOption(initializeOption);
-    parser.addOption(initializeSettingsOption);
 
     // TCP Service
     QCommandLineOption serviceTcpOption("service-tcp", QCoreApplication::translate("main", "Enable raw TCP service."));
@@ -115,7 +113,7 @@ int main(int argc, char *argv[])
 
     // ///////////////////////////////////////////////////////////////////////////////////////////////
     // Initialize stuff
-    if (parser.isSet(initializeOption) || parser.isSet(initializeSettingsOption)) {
+    if (parser.isSet(initializeOption)) {
         qInfo().nospace().noquote() << "Initializing settings...";
         InitializeSettings initializeSettings;
         initializeSettings.initialize();
