@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setOrganizationName("Christoff Humphries");
     QCoreApplication::setOrganizationDomain("deadbeef.monster");
     QCoreApplication::setApplicationName("AzalyxCX");
-    QCoreApplication::setApplicationVersion("v0.1");
+    QCoreApplication::setApplicationVersion("0.1");
     QTextStream out(stdout);
     QSettings settings;
     Database database;
@@ -66,7 +66,19 @@ int main(int argc, char *argv[])
 
 
     // Banner
-    printf("%s v%s\n", QCoreApplication::applicationVersion().toStdString().c_str(), QCoreApplication::applicationName().toStdString().c_str());
+    printf("░░▓█████████████░█████████████▓▒█████████████▒█████▒▓▓▓▓▓████▓▒░░▒▓▓▓██████▓▒░░░░░░▓████░███████████████▓▒░░░░░░▓████░\n");
+    printf("░░▓████▒░░░▓████░░░░░░░▒▒▒████▓▒████▒░░░▒████▒█████░░░░░░░░▓████▓░░░░▒████████▒░░░░▓████░█████░░░░░░░▒▓████░░░░░▓████░\n");
+    printf("░░▓███████▓█████░░░░▒▓████▓▓▓█▓▓████████▓████▒█████░░░░░░░░░▒████▒░░░▒████▒████▒░░░▓████░████▓░░░░░░░░░▓████▒░░░▓████░\n");
+    printf("▒▒▓████░▒▓██████░░▒████▒░░░░░░▒▓████▒░▓██████▒█████░░░░░████▒█████░░░▒████░████▓░░░▓████░████▓░░░░▓████░████▓░░░▓████░\n");
+    printf("░░▓████░░░░█████░▓████░░░░░░░░░▒████░░░░█████▒█████░░░░░████▒█████░░░▒████░████▓░░░▓████░████▓░░░░▓████░████▓░░░▓████░\n");
+    printf("░░▓████░░░░▒████░████▒░░░░░░░░░▒████░░░░░████▒█████▒▒▒░░████▒▒▓███▒░▒▓██▓▓░▒▓███▒░▒███▓▒░█████▒▒▒░▓████░▓▓██▓▒░▒███▓▒░\n");
+    printf("░░▒▓▓▓▓░░░░▒████░████▓░░░░░░░░░░▓▓▓▓░░░░░████▓▓▓▒▒▒▒▓███████▒░░░░▓████░░░░░▒▓▓██▒▒▒██▓▓▒▒▓▒▒▒▒▓████████░▒▓▓██▒▒▓██▓▓▒░\n");
+    printf("░░░░░░░░░░░▒████▒█████████████▓░░░░░░░░░░████▒░░░░░░░░▒█████▒░░░░▓████░░░░░████▓░░░▓████░░░░░░░░▒██████░████▓░░░█████░\n");
+    printf("░░░░░░░░░░░▒██████████████████▓░░░░░░░░░░████▒░░░░░░░░░▒████▒░░░░▓███▓░░░░░████▓░░░▓████░░░░░░░░░░████▓░████▒░░░▓████░\n");
+    printf("%s %s (Scarlet Fire) - A personal protocol research and Qt C++ programming project.\n",
+           QCoreApplication::applicationName().toStdString().c_str(),
+           QCoreApplication::applicationVersion().toStdString().c_str());
+    printf("(c) 2023, Christoff Humphries <christoff@deadbeef.monster>\n\n");
     
 
     // System info
@@ -74,7 +86,7 @@ int main(int argc, char *argv[])
                                 << " (" << QSysInfo::kernelType() << " " << QSysInfo::kernelVersion()
                                 << ") " << QSysInfo::buildAbi();
     // Configuration
-    qInfo().nospace().noquote() << "Configuration file: " << settings.fileName();
+    qInfo().nospace().noquote() << "Configuration file: " << settings.fileName() << "\n\n";
 
 
     // ///////////////////////////////////////////////////////////////////////////////////////////////
