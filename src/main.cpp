@@ -56,9 +56,9 @@ int main(int argc, char *argv[])
 
     QCoreApplication app(argc, argv);
     QCoreApplication::setOrganizationName("Christoff Humphries");
-    QCoreApplication::setOrganizationDomain("deadbeef.monster");
+    QCoreApplication::setOrganizationDomain("azalyx.cx");
     QCoreApplication::setApplicationName("AzalyxCX");
-    QCoreApplication::setApplicationVersion("0.1");
+    QCoreApplication::setApplicationVersion("v0.1");
     QTextStream out(stdout);
     QSettings settings;
     Database database;
@@ -74,7 +74,7 @@ int main(int argc, char *argv[])
     printf("░░▓████░░░░▒████░████▒░░░░░░░░░▒████░░░░░████▒█████▒▒▒░░████▒▒▓███▒░▒▓██▓▓░▒▓███▒░▒███▓▒░█████▒▒▒░▓████░▓▓██▓▒░▒███▓▒░\n");
     printf("░░▒▓▓▓▓░░░░▒████░████▓░░░░░░░░░░▓▓▓▓░░░░░████▓▓▓▒▒▒▒▓███████▒░░░░▓████░░░░░▒▓▓██▒▒▒██▓▓▒▒▓▒▒▒▒▓████████░▒▓▓██▒▒▓██▓▓▒░\n");
     printf("░░░░░░░░░░░▒████▒█████████████▓░░░░░░░░░░████▒░░░░░░░░▒█████▒░░░░▓████░░░░░████▓░░░▓████░░░░░░░░▒██████░████▓░░░█████░\n");
-    printf("░░░░░░░░░░░▒██████████████████▓░░░░░░░░░░████▒░░░░░░░░░▒████▒░░░░▓███▓░░░░░████▓░░░▓████░░░░░░░░░░████▓░████▒░░░▓████░\n");
+    printf("░░░░░░░░░░░▒█████████████████▓░░░░░░░░░░░████▒░░░░░░░░░▒████▒░░░░▓███▓░░░░░████▓░░░▓████░░░░░░░░░░████▓░████▒░░░▓████░\n");
     printf("%s %s (Scarlet Fire) - A personal protocol research and Qt C++ programming project.\n",
            QCoreApplication::applicationName().toStdString().c_str(),
            QCoreApplication::applicationVersion().toStdString().c_str());
@@ -86,7 +86,7 @@ int main(int argc, char *argv[])
                                 << " - " << QSysInfo::kernelType() << " " << QSysInfo::kernelVersion()
                                 << " - " << QSysInfo::buildAbi();
     // Configuration
-    qInfo().nospace().noquote() << "Configuration file: " << settings.fileName() << "\n\n";
+    qInfo().nospace().noquote() << "Configuration file: " << settings.fileName() ;
 
 
     // ///////////////////////////////////////////////////////////////////////////////////////////////
