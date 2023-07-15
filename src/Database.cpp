@@ -47,8 +47,8 @@ bool Database::connectToDatabase()
             sqliteName = defaultSqliteDatabasePath;
         }
 
-        QFileInfo checkFile(sqliteName);
-        if (!checkFile.exists()) {
+        QFileInfo checkDatabaseFile(sqliteName);
+        if (!checkDatabaseFile.exists()) {
             firstTime = true;
         }
 
@@ -66,6 +66,13 @@ bool Database::connectToDatabase()
         // Initialize database for the first time
         if (firstTime) {
             QString sqlFilePath = QCoreApplication::applicationDirPath() + QDir::separator() + "sql" + QDir::separator() + "sqlite.sql";
+            QFileInfo checkSqlFile(sqlFilePath);
+            if (!checkSqlFile.exists()) {
+                qFatal() << "sqlite sql file " << sqlFilePath
+                         << "not in expected location and database is empty; execute the SQL from that file to initialize your database at " << sqliteName << ". "
+                         << "On a Unix-like operating system, something like this: sqlite3 " << sqliteName << " < /path/to/sql/sqlite.sql";
+            }
+
             QFile qf = QFile(sqlFilePath);
             qf.open(QIODevice::ReadOnly);
             QString queryStr(qf.readAll());
@@ -76,7 +83,7 @@ bool Database::connectToDatabase()
                 if (s.trimmed() != "") {
                     query.exec(s);
                     if(query.lastError().type() != QSqlError::NoError) {
-                        qDebug() << "SQL Failure: " << query.lastError().text() << ": " << s;
+                        qFatal() << "SQL Failure: " << query.lastError().text() << ": " << s;
                     }
                 }
             }
