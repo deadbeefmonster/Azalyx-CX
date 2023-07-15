@@ -2,7 +2,6 @@
 
 Logger::Logger(QObject *parent) : QObject(parent)
 {
-<<<<<<< HEAD
 
 }
 
@@ -10,10 +9,6 @@ void Logger::start() {
     // Check if table exists, if not create it
     Database database;
     database.connectToDatabase();
-=======
-    // Check if table exists, if not create it
-    Database database;
->>>>>>> 08fa7af (Migrate to Qt6 and start new repository)
     if (! database.getDb().tables().contains( QLatin1String("log"))) {
         qCritical() << "Database is missing the 'log' table.";
     }

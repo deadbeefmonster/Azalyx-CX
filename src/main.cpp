@@ -13,11 +13,6 @@
 #include <QTextStream>
 #include <QSysInfo>
 
-<<<<<<< HEAD
-//#include <cstdio>
-
-=======
->>>>>>> 08fa7af (Migrate to Qt6 and start new repository)
 #include "Database.h"
 #include "InitializeSettings.h"
 #include "Logger.h"
@@ -60,15 +55,9 @@ int main(int argc, char *argv[])
     qInstallMessageHandler(myMessageOutput); // Install the handler
 
     QCoreApplication app(argc, argv);
-<<<<<<< HEAD
     QCoreApplication::setOrganizationName("Christoff Humphries");
     QCoreApplication::setOrganizationDomain("deadbeef.monster");
     QCoreApplication::setApplicationName("AzalyxCX");
-=======
-    QCoreApplication::setOrganizationName("SogonSecurity");
-    QCoreApplication::setOrganizationDomain("sogonsecurity.com");
-    QCoreApplication::setApplicationName("Clutching Pearls C2");
->>>>>>> 08fa7af (Migrate to Qt6 and start new repository)
     QCoreApplication::setApplicationVersion("v0.1");
     QTextStream out(stdout);
     QSettings settings;
@@ -77,23 +66,8 @@ int main(int argc, char *argv[])
 
 
     // Banner
-<<<<<<< HEAD
-
-
-
-
-
     printf("%s v%s\n", QCoreApplication::applicationVersion().toStdString().c_str(), QCoreApplication::applicationName().toStdString().c_str());
     
-=======
-    QString banner;
-    banner  = QCoreApplication::applicationName() + " " + QCoreApplication::applicationVersion();
-    banner += " - A PoC learning project by Chris Humphries (@sogonsec)";
-    //out << Qt::endl << banner << Qt::endl;
-    out << "+-" << QString("-").repeated(banner.length()) << "-+" << Qt::endl
-        << "| " << banner << " |" << Qt::endl
-        << "+-" << QString("-").repeated(banner.length()) << "-+" << Qt::endl;
->>>>>>> 08fa7af (Migrate to Qt6 and start new repository)
 
     // System info
     qInfo().nospace().noquote() << "System Info: " << QSysInfo::prettyProductName()
@@ -101,15 +75,6 @@ int main(int argc, char *argv[])
                                 << ") " << QSysInfo::buildAbi();
     // Configuration
     qInfo().nospace().noquote() << "Configuration file: " << settings.fileName();
-<<<<<<< HEAD
-=======
-    // Database
-    qInfo().nospace().noquote() << "Database: " << database.getDb().driverName()
-                                << " for database " << database.getDb().databaseName();
-
-    out << Qt::endl;
-
->>>>>>> 08fa7af (Migrate to Qt6 and start new repository)
 
 
     // ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -149,15 +114,11 @@ int main(int argc, char *argv[])
     }
     // ///////////////////////////////////////////////////////////////////////////////////////////////
 
-<<<<<<< HEAD
     // Database
     database.connectToDatabase();
     logger.start();
     qInfo().nospace().noquote() << "Database: " << database.getDb().driverName()
                                 << " for database " << database.getDb().databaseName();
-=======
-
->>>>>>> 08fa7af (Migrate to Qt6 and start new repository)
 
     // ///////////////////////////////////////////////////////////////////////////////////////////////
     // Start services

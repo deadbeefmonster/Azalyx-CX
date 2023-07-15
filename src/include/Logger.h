@@ -12,10 +12,8 @@ class Logger : public QObject
 
 public:
     explicit Logger(QObject *parent = nullptr);
-<<<<<<< HEAD
+
     void start();
-=======
->>>>>>> 08fa7af (Migrate to Qt6 and start new repository)
     void log(QString message, QString scope, QString subject);
 
 signals:

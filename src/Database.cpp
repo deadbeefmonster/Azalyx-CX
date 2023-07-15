@@ -2,10 +2,9 @@
 
 Database::Database(QObject *parent) : QObject(parent)
 {
-<<<<<<< HEAD
-=======
+
     this->connectToDatabase();
->>>>>>> 08fa7af (Migrate to Qt6 and start new repository)
+
 }
 
 const QSqlDatabase Database::getDb()
@@ -41,11 +40,7 @@ bool Database::connectToDatabase()
     // Read values from settings
     QString databaseType = settings.value("database/type", "").toString().toLower();
     if (databaseType == "sqlite") {
-<<<<<<< HEAD
         QString defaultSqliteDatabasePath = QCoreApplication::applicationDirPath() + QDir::separator() + "database.db";
-=======
-        QString defaultSqliteDatabasePath = QCoreApplication::applicationDirPath() + QDir::separator() + "clutchingpearls.db";
->>>>>>> 08fa7af (Migrate to Qt6 and start new repository)
         QString sqliteName = settings.value("database_sqlite/path", defaultSqliteDatabasePath).toString();
         if (sqliteName == "auto") {
             sqliteName = defaultSqliteDatabasePath;

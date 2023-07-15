@@ -1,8 +1,5 @@
 #include "InitializeSettings.h"
-<<<<<<< HEAD
 #include "Logger.h"
-=======
->>>>>>> 08fa7af (Migrate to Qt6 and start new repository)
 
 InitializeSettings::InitializeSettings(QObject *parent) : QObject(parent)
 {
@@ -12,10 +9,7 @@ InitializeSettings::InitializeSettings(QObject *parent) : QObject(parent)
 void InitializeSettings::initialize()
 {
     qDebug() << "Entered InitializeSettings::initialize";
-<<<<<<< HEAD
 
-=======
->>>>>>> 08fa7af (Migrate to Qt6 and start new repository)
     QSettings settings;
 
     settings.setValue("system/thread_pool_max", "auto");
