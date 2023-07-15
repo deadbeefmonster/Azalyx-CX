@@ -153,9 +153,11 @@ int main(int argc, char *argv[])
         if (serviceTcp.isListening()) {
             qInfo().nospace().noquote() << ServiceTcp::NAME << ": listening on port " << port << ".";
             servicesStarted = true;
+            logger.log("TCP service started","services startup", "services");
         }
         else {
             qWarning().nospace().noquote() << ServiceTcp::NAME << ": NOT listening on port " << port << ".";
+            logger.log(QString("%1 not started, couldn't listen on port %2").arg(ServiceTcp::NAME, QString(port)), "services startup", "services");
         }
     }
     // End - Raw TCP service
@@ -163,12 +165,14 @@ int main(int argc, char *argv[])
     // Check if at least one service has started
     if (servicesStarted == false) {
         qWarning().nospace().noquote() << "No services are started! You need to start a service for this software to be useful.";
+        logger.log("No services were started","services startup", "services");
     }
     // ///////////////////////////////////////////////////////////////////////////////////////////////
 
 
     // Application started without errors!
     qInfo().nospace().noquote() << QCoreApplication::applicationName() << " " << QCoreApplication::applicationVersion() << " started!";
+    logger.log(QString("Application %1 %2 started").arg(QCoreApplication::applicationName(), QCoreApplication::applicationVersion()), "application state", "application");
 
     // Main loop
     return app.exec();

@@ -15,6 +15,7 @@ public:
     bool connectToDatabase();
     const QSqlDatabase getDb();
     void setDb(QSqlDatabase newDb);
+    static void quit();
 
 protected:
     QString generateUniqueName(QString name);

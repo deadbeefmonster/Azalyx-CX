@@ -6,18 +6,15 @@ Logger::Logger(QObject *parent) : QObject(parent)
 }
 
 void Logger::start() {
-    // Check if table exists, if not create it
     Database database;
     database.connectToDatabase();
     if (! database.getDb().tables().contains( QLatin1String("log"))) {
-        qCritical() << "Database is missing the 'log' table.";
+        qFatal() << "Database is missing the 'log' table. Ensure the sql/sqlite.sql is executed against the database and try again.";
     }
 }
 
 void Logger::log(QString message, QString scope, QString subject)
 {
-    qDebug() << "Entered Logger::log";
-
     Database database;
 
     QSqlQuery sqlQuery(database.getDb());
@@ -26,7 +23,5 @@ void Logger::log(QString message, QString scope, QString subject)
     sqlQuery.bindValue(":scope", scope);
     sqlQuery.bindValue(":subject", subject);
     sqlQuery.exec();
-
-    qDebug() << "Leaving Logger::log";
 }
 

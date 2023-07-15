@@ -1,4 +1,5 @@
 #include "Database.h"
+#include "Logger.h"
 
 Database::Database(QObject *parent) : QObject(parent)
 {
@@ -190,4 +191,11 @@ QString Database::generateUniqueName(QString name)
     QString uniqueName;
     uniqueName = name + "/" + QString::number((quint64)QThread::currentThread(), 16);
     return uniqueName;
+}
+
+void Database::quit()
+{
+    Logger logger;
+    logger.log("Quitting application, database clean-up occurred.", "application", "application");
+
 }
