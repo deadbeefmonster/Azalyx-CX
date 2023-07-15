@@ -34,17 +34,24 @@ QTDS	Sybase Adaptive Server
 bool Database::connectToDatabase()
 {
     bool status = false;
+    bool firstTime = false;
     QSqlDatabase newDb;
     QSettings settings;
 
     // Read values from settings
     QString databaseType = settings.value("database/type", "").toString().toLower();
-    if (databaseType == "sqlite") {
+    if (databaseType == "" || databaseType == "sqlite") {
         QString defaultSqliteDatabasePath = QCoreApplication::applicationDirPath() + QDir::separator() + "database.db";
         QString sqliteName = settings.value("database_sqlite/path", defaultSqliteDatabasePath).toString();
         if (sqliteName == "auto") {
             sqliteName = defaultSqliteDatabasePath;
         }
+
+        QFileInfo checkFile(sqliteName);
+        if (!checkFile.exists()) {
+            firstTime = true;
+        }
+
         QString uniqueName = this->generateUniqueName(sqliteName);
         if(QSqlDatabase::contains(uniqueName)) {
             this->setDb(QSqlDatabase::database(uniqueName));
@@ -55,6 +62,25 @@ bool Database::connectToDatabase()
             this->setDb(newDb);
         }
         status = this->db.open();
+
+        // Initialize database for the first time
+        if (firstTime) {
+            QString sqlFilePath = QCoreApplication::applicationDirPath() + QDir::separator() + "sql" + QDir::separator() + "sqlite.sql";
+            QFile qf = QFile(sqlFilePath);
+            qf.open(QIODevice::ReadOnly);
+            QString queryStr(qf.readAll());
+            qf.close();
+            QStringList qList = queryStr.split(';');
+            QSqlQuery query(this->db);
+            foreach(const QString &s, qList) {
+                if (s.trimmed() != "") {
+                    query.exec(s);
+                    if(query.lastError().type() != QSqlError::NoError) {
+                        qDebug() << "SQL Failure: " << query.lastError().text() << ": " << s;
+                    }
+                }
+            }
+        }
     }
     else if (databaseType == "mysql") {
         qDebug() << "In MySQL section";
