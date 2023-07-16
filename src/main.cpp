@@ -28,23 +28,22 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QS
 {
     QByteArray localMsg = msg.toLocal8Bit();
     QByteArray timestamp = QDateTime::currentDateTime().toString().toLocal8Bit();
+
     switch (type) {
     case QtDebugMsg:
-        fprintf(stderr, "[%s] DEBUG: [%s:%u] %s\r\n", timestamp.constData(), context.file, context.line, localMsg.constData());
+        fprintf(stderr, "[%s] DEBUG: [%s:%u] %s\n", timestamp.constData(), context.file, context.line, localMsg.constData());
         break;
     case QtInfoMsg:
-        printf("[%s] INFO: %s\r\n", timestamp.constData(), localMsg.constData());
+        printf("[%s] INFO: %s\n", timestamp.constData(), localMsg.constData());
         break;
     case QtWarningMsg:
-        printf("[%s] WARN: %s\r\n", timestamp.constData(), localMsg.constData());
+        printf("[%s] WARN: %s\n", timestamp.constData(), localMsg.constData());
         break;
     case QtCriticalMsg:
-        printf("[%s] FATAL ERROR: %s\r\n", timestamp.constData(), localMsg.constData());
-        printf("Exiting...\r\n");
+        printf("[%s] ERROR: %s\n", timestamp.constData(), localMsg.constData());
         exit(EXIT_FAILURE);
     case QtFatalMsg:
-        printf("[%s] FATAL ERROR: %s\r\n", timestamp.constData(), localMsg.constData());
-        printf("Exiting...\r\n");
+        printf("[%s] ERROR: %s\n", timestamp.constData(), localMsg.constData());
         exit(EXIT_FAILURE);
     }
 }
@@ -163,8 +162,8 @@ int main(int argc, char *argv[])
 
     // Check if at least one service has started
     if (servicesStarted == false) {
-        qWarning().nospace().noquote() << "No services are started! You need to start a service for this software to be useful.";
         logger.log("No services were started","services startup", "services");
+        qCritical().nospace().noquote() << "No services were started! You need to start a service for this software to be useful.";
     }
     // ///////////////////////////////////////////////////////////////////////////////////////////////
 
