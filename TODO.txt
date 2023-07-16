@@ -1,0 +1,101 @@
+Version 1.0 Features
+
+I'll be breaking these features out into separate releases to work
+towards.
+
+=== Server ============================================================
+Data Storage:
+- SQLite (relational DB, file)
+- MySQL (relational DB, network)
+- PostgreSQL (relational DB, network)
+
+Services:
+- DNS over UDP
+- raw UDP
+- raw TCP
+- HTTP
+- HTTPS
+- FTP (passive and/or active? unsure)
+- SMTP
+- SNMP
+- ICMP (questionable, would be neat to do)
+- IMAP
+- SMB (perhaps agent-only using named pipes? seems silly to run an SMB
+  server on the Internet)
+- DNS over TCP
+- DNS over HTTPS
+- Unix socket (local, obviously)
+- file watch (local)
+- file watch (S3)
+- file watch (Dropbox)
+- file watch (Google Drive)
+
+Users:
+- admin sessions (operators)
+- client sessions (agents)
+
+Encryption:
+- RSA encryption
+- AES encryption
+
+API:
+- server API with swagger file
+
+Data Handling:
+- data chunker (handles "packets" of data that will be reassembled later)
+- data transmission (abstraction to handle data being passed off to a
+  service or queue to be serviced)
+- data modification (compression, encryption, etc)
+- data serialization (unsure how best to do this yet or if it is needed)
+- data envelopes (think SOAP envelopes, but without the bloat)
+
+Plugins:
+- dynamic plugin support at all levels, unsure how to best do this,
+  probably QPluginLoader
+- dynamic plugin support using a scripting language? Unsure how to do
+  that, would have to bolt on Lua or Python, not sure I want to do
+  that
+
+Queueing:
+- server command queues for agent client sessions
+
+=== Server Interface ==================================================
+
+Clients are going to be communicating with the server via an API, so it
+may not matter what the client is. I can even make the API calls
+manually. 
+
+TUI:
+- REPL CLI 
+
+GUI:
+- Qt
+
+=== Agent Builder =====================================================
+
+Realistically, having agents for Windows is most meaningful and perhaps
+where all the fun is, but there will need to be machinery to build
+agents from scratch with things hardcoded in like server connection
+information, initial key, etc.
+
+Unsure if this is another service or not that is bolted on or
+completely separate.
+
+- templating system to swap out variables and blocks of code
+- build Windows binaries (x86, x86-64)
+- build GNU/Linux binaries (x86-64, ARM-64)
+- build macOS binaries (x86-64, ARM-64)
+
+=== Agent =============================================================
+- agent relaying (agent client sessions relaying through other agents)
+- agent time/day schedule (time when agent is "alive")
+- agent kill date/time (automatic kill switch for agents to delete
+  themselves based on timestamp)
+- agent kill conditions (automatic kill switch for agents based on
+  specific conditions agents can discern)
+- agent command queue (command queues to send to a server via agent
+  sessions)
+- agent using multiple server service communications (playbook for how
+  to attempt to communicate back to the server)
+
+
