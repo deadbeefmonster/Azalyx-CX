@@ -1,0 +1,4 @@
+HTTP/HTTPS Server
+- https://doc.qt.io/qt-6/qthttpserver-index.html
+- https://doc.qt.io/qt-6/qabstracthttpserver.html#sslSetup
+- https://doc.qt.io/qt-6/qthttpserver-colorpalette-main-cpp.html
