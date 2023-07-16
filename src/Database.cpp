@@ -69,9 +69,9 @@ bool Database::connectToDatabase()
             QString sqlFilePath = QCoreApplication::applicationDirPath() + QDir::separator() + "sql" + QDir::separator() + "sqlite.sql";
             QFileInfo checkSqlFile(sqlFilePath);
             if (!checkSqlFile.exists()) {
-                qFatal() << "sqlite sql file " << sqlFilePath
-                         << "not in expected location and database is empty; execute the SQL from that file to initialize your database at " << sqliteName << ". "
-                         << "On a Unix-like operating system, something like this: sqlite3 " << sqliteName << " < /path/to/sql/sqlite.sql";
+                qCritical().noquote().nospace() << "sqlite sql file " << sqlFilePath
+                                                << "not in expected location and database is empty; execute the SQL from that file to initialize your database at " << sqliteName << ". "
+                                                << "On a Unix-like operating system, something like this: sqlite3 " << sqliteName << " < /path/to/sql/sqlite.sql";
             }
 
             QFile qf = QFile(sqlFilePath);
@@ -84,7 +84,7 @@ bool Database::connectToDatabase()
                 if (s.trimmed() != "") {
                     query.exec(s);
                     if(query.lastError().type() != QSqlError::NoError) {
-                        qFatal() << "SQL Failure: " << query.lastError().text() << ": " << s;
+                        qCritical().noquote().nospace() << "SQL Failure: " << query.lastError().text() << ": " << s;
                     }
                 }
             }

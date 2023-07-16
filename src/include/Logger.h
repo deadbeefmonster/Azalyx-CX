@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QDebug>
 
+#include "Database.h"
 
 class Logger : public QObject
 {

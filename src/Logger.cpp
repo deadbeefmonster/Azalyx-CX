@@ -9,7 +9,7 @@ void Logger::start() {
     Database database;
     database.connectToDatabase();
     if (! database.getDb().tables().contains( QLatin1String("log"))) {
-        qFatal() << "Database is missing the 'log' table. Ensure the sql/sqlite.sql is executed against the database and try again.";
+        qCritical().noquote().nospace() << "Database is missing the 'log' table. Ensure the sql/sqlite.sql is executed against the database and try again.";
     }
 }
 

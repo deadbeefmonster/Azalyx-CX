@@ -5,6 +5,8 @@
 #include <QObject>
 #include <QRunnable>
 
+#include "DataRequestProcessor.h"
+#include "DataTransmogrifier.h"
 
 class ServiceTcpProcessorTask : public QObject, public QRunnable
 {
