@@ -1,0 +1,5 @@
+Once things aren't so in flux, I'll be logging changes to this file,
+but currently I'm just changing so much there's a stable ground to
+build reliable features off of.
+
+Soon...
