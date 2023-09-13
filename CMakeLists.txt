@@ -17,7 +17,9 @@ find_package(QT NAMES Qt6 REQUIRED COMPONENTS Core)
 find_package(Qt6 REQUIRED COMPONENTS Core)
 find_package(Qt6 REQUIRED COMPONENTS Sql)
 find_package(Qt6 REQUIRED COMPONENTS Network)
-
+find_package(Qt6 REQUIRED COMPONENTS HttpServer)
+find_package(OpenSSL REQUIRED)
+include_directories(${OPENSSL_INCLUDE_DIR})
 
 add_executable(${PROJECT_NAME}
     src/CommandHandler.cpp
@@ -61,6 +63,8 @@ target_include_directories(${PROJECT_NAME} PUBLIC src/include)
 target_link_libraries(${PROJECT_NAME} Qt6::Core)
 target_link_libraries(${PROJECT_NAME} Qt6::Sql)
 target_link_libraries(${PROJECT_NAME} Qt6::Network)
+target_link_libraries(${PROJECT_NAME} Qt6::HttpServer)
+target_link_libraries(${PROJECT_NAME} OpenSSL::SSL OpenSSL::Crypto)
 
 
 
