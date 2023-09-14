@@ -1,5 +1,5 @@
-#include <QCommandLineParser>
 #include <QCommandLineOption>
+#include <QCommandLineParser>
 #include <QCoreApplication>
 #include <QDateTime>
 #include <QDebug>
@@ -8,10 +8,10 @@
 #include <QList>
 #include <QListIterator>
 #include <QSettings>
-#include <QtSql>
 #include <QString>
-#include <QTextStream>
 #include <QSysInfo>
+#include <QTextStream>
+#include <QtSql>
 
 #include "Database.h"
 #include "InitializeSettings.h"
@@ -64,6 +64,34 @@ int main(int argc, char *argv[])
     Logger logger;
 
 
+
+
+
+    // ///////////////////////////////////////////////////////////////////////////////////////////////
+    // CLI argument provisioning
+    QCommandLineParser parser;
+    //parser.addHelpOption();
+    parser.addVersionOption();
+
+    // Help
+    QCommandLineOption helpOption({"help", "h"},QCoreApplication::translate("main", "Help"));
+    parser.addOption(helpOption);
+
+    // Initialize/first time stuff
+    QCommandLineOption initializeOption("initialize", QCoreApplication::translate("main", "Initialize the settings data."));
+    parser.addOption(initializeOption);
+
+    // TCP Service
+    QCommandLineOption serviceTcpOption("service-tcp", QCoreApplication::translate("main", "Enable raw TCP service."));
+    QCommandLineOption serviceTcpPortOption("service-tcp-port", QCoreApplication::translate("main", "Raw TCP service port number."),
+                                            QCoreApplication::translate("main", "port number"));
+    parser.addOption(serviceTcpOption);
+    parser.addOption(serviceTcpPortOption);
+
+    parser.process(app);
+    // ///////////////////////////////////////////////////////////////////////////////////////////////
+
+    // ///////////////////////////////////////////////////////////////////////////////////////////////
     // Banner
     out << "░░▓█████████████░█████████████▓▒█████████████▒█████▒▓▓▓▓▓████▓▒░░▒▓▓▓██████▓▒░░░░░░▓████░███████████████▓▒░░░░░░▓████░\n"
         << "░░▓████▒░░░▓████░░░░░░░▒▒▒████▓▒████▒░░░▒████▒█████░░░░░░░░▓████▓░░░░▒████████▒░░░░▓████░█████░░░░░░░▒▓████░░░░░▓████░\n"
@@ -86,27 +114,12 @@ int main(int argc, char *argv[])
     // Configuration
     qInfo().nospace().noquote() << "Configuration file: " << settings.fileName() ;
 
-
     // ///////////////////////////////////////////////////////////////////////////////////////////////
-    // CLI argument provisioning
-    QCommandLineParser parser;
-    parser.addHelpOption();
-    parser.addVersionOption();
-
-    // Initialize/first time stuff
-    QCommandLineOption initializeOption("initialize", QCoreApplication::translate("main", "Initialize the settings data."));
-    parser.addOption(initializeOption);
-
-    // TCP Service
-    QCommandLineOption serviceTcpOption("service-tcp", QCoreApplication::translate("main", "Enable raw TCP service."));
-    QCommandLineOption serviceTcpPortOption("service-tcp-port", QCoreApplication::translate("main", "Raw TCP service port number."),
-                                            QCoreApplication::translate("main", "port number"));
-    parser.addOption(serviceTcpOption);
-    parser.addOption(serviceTcpPortOption);
-
-    parser.process(app);
+    // Help
+    if (parser.isSet(helpOption)) {
+        parser.showHelp();
+    }
     // ///////////////////////////////////////////////////////////////////////////////////////////////
-
 
 
     // ///////////////////////////////////////////////////////////////////////////////////////////////
