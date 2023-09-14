@@ -2,3 +2,11 @@ HTTP/HTTPS Server
 - https://doc.qt.io/qt-6/qthttpserver-index.html
 - https://doc.qt.io/qt-6/qabstracthttpserver.html#sslSetup
 - https://doc.qt.io/qt-6/qthttpserver-colorpalette-main-cpp.html
+
+AES
+- https://medium.com/@yzahn/aes-encryption-with-openssl-and-qt-c-6fb7c2321e20
+- https://forum.qt.io/topic/111294/encrypt-decrypt-file-in-qt-how/3
+- https://github.com/deadbeefmonster/Azalyx-CX.old/blob/carmilla/src/crypto_aes.c
+- https://www.openssl.org/docs/manmaster/man3/RAND_bytes.html
+- https://wiki.openssl.org/index.php/EVP_Symmetric_Encryption_and_Decryption
+- https://github.com/saju/misc/blob/master/misc/openssl_aes.c
