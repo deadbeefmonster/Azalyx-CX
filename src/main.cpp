@@ -14,7 +14,7 @@
 #include <QtSql>
 
 #include "Database.h"
-#include "InitializeSettings.h"
+#include "SettingsInitialize.h"
 #include "Logger.h"
 #include "ServiceTcp.h"
 

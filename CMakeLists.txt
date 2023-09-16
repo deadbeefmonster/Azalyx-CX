@@ -21,45 +21,60 @@ find_package(Qt6 REQUIRED COMPONENTS HttpServer)
 find_package(OpenSSL REQUIRED)
 include_directories(${OPENSSL_INCLUDE_DIR})
 
+
+# find src -type f \( -name "*.cpp" -o -name "*.h" \) | sort
 add_executable(${PROJECT_NAME}
-    src/CommandHandler.cpp
-    src/CommandShell.cpp
-    src/DataEnvelope.cpp
-    src/DataEnvelopeBody.cpp
-    src/DataEnvelopeChunker.cpp
-    src/DataEnvelopeFault.cpp
-    src/DataEnvelopeHeader.cpp
-    src/DataRequestProcessor.cpp
-    src/DataResponseProcessor.cpp
-    src/DataTransmogrifier.cpp
-    src/Database.cpp
-    src/InitializeSettings.cpp
-    src/Logger.cpp
-    src/ServiceTcp.cpp
-    src/ServiceTcpProcessor.cpp
-    src/ServiceTcpProcessorTask.cpp
-    src/include/CommandHandler.h
-    src/include/CommandInterface.h
-    src/include/CommandShell.h
-    src/include/DataEnvelope.h
-    src/include/DataEnvelopeBody.h
-    src/include/DataEnvelopeChunker.h
-    src/include/DataEnvelopeFault.h
-    src/include/DataEnvelopeHeader.h
-    src/include/DataRequestProcessor.h
-    src/include/DataResponseProcessor.h
-    src/include/DataTransmogrifier.h
-    src/include/Database.h
-    src/include/InitializeSettings.h
-    src/include/Logger.h
-    src/include/ServiceTcp.h
-    src/include/ServiceTcpProcessor.h
-    src/include/ServiceTcpProcessorTask.h
+    src/Command/CommandHandler.cpp
+    src/Command/CommandHandler.h
+    src/Command/CommandInterface.h
+    src/Command/CommandShell.cpp
+    src/Command/CommandShell.h
+    src/Data/DataRequestProcessor.cpp
+    src/Data/DataRequestProcessor.h
+    src/Data/DataResponseProcessor.cpp
+    src/Data/DataResponseProcessor.h
+    src/Data/DataTransmogrifier.cpp
+    src/Data/DataTransmogrifier.h
+    src/Data/Envelope/DataEnvelope.cpp
+    src/Data/Envelope/DataEnvelope.h
+    src/Data/Envelope/DataEnvelopeBody.cpp
+    src/Data/Envelope/DataEnvelopeBody.h
+    src/Data/Envelope/DataEnvelopeChunker.cpp
+    src/Data/Envelope/DataEnvelopeChunker.h
+    src/Data/Envelope/DataEnvelopeFault.cpp
+    src/Data/Envelope/DataEnvelopeFault.h
+    src/Data/Envelope/DataEnvelopeHeader.cpp
+    src/Data/Envelope/DataEnvelopeHeader.h
+    src/Database/Database.cpp
+    src/Database/Database.h
+    src/Logger/Logger.cpp
+    src/Logger/Logger.h
+    src/Service/Tcp/ServiceTcp.cpp
+    src/Service/Tcp/ServiceTcp.h
+    src/Service/Tcp/ServiceTcpProcessor.cpp
+    src/Service/Tcp/ServiceTcpProcessor.h
+    src/Service/Tcp/ServiceTcpProcessorTask.cpp
+    src/Service/Tcp/ServiceTcpProcessorTask.h
+    src/Settings/SettingsInitialize.cpp
+    src/Settings/SettingsInitialize.h
     src/main.cpp
 )
 
 
-target_include_directories(${PROJECT_NAME} PUBLIC src/include)
+# find src -type d | sort
+target_include_directories(${PROJECT_NAME} PUBLIC
+    src
+    src/Command
+    src/Data
+    src/Data/Envelope
+    src/Database
+    src/Logger
+    src/Service
+    src/Service/Tcp
+    src/Settings
+)
+
+
 target_link_libraries(${PROJECT_NAME} Qt6::Core)
 target_link_libraries(${PROJECT_NAME} Qt6::Sql)
 target_link_libraries(${PROJECT_NAME} Qt6::Network)
